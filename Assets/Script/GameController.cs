@@ -30,7 +30,9 @@ public class GameController : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
     }
 
-    void Start () {       
+    void Start () {
+
+        Application.targetFrameRate = 60;
         EnemyVariable.EnemyDeadGold += AddGold;
         PlayerPrefs.SetString("LittleGunacquired", "true");
         PlayerPrefs.SetInt("LittleGunlevel", 1);

@@ -5,7 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class UINavigation : MonoBehaviour {
 
-    public void GoToHome() {
+    public string sceneToChange;
+
+    public GameObject mask, orangePanel;
+
+    public void ChangeScene()
+    {
+        SceneManager.LoadSceneAsync(sceneToChange);
+    }
+
+    public void SetSceneToChange(string sceneName) {
+        if (mask != null && orangePanel != null)
+        {
+            sceneToChange = sceneName;
+            mask.SetActive(true);
+            orangePanel.SetActive(true);
+            Invoke("ChangeScene", 1.1f);
+        }
+
+        else
+            ChangeScene();
+       
+    }
+
+    /*public void GoToHome() {
         SceneManager.LoadSceneAsync("Home");
     }
 
@@ -20,5 +43,5 @@ public class UINavigation : MonoBehaviour {
     public void GoToMenu()
     {
         SceneManager.LoadSceneAsync("Menu");
-    }
+    }*/
 }

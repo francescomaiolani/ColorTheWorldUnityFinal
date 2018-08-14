@@ -20,6 +20,7 @@ public class ShadowLenghtAdapter : MonoBehaviour {
         MenuUIManager.ChangeShadow += Adapt;
         HomeUIManager.ChangeShadow += Adapt;
         GameUIManager.ChangeShadow += Adapt;
+        ShopUIManager.ChangeShadow += Adapt;
 
     }
 
@@ -44,6 +45,7 @@ public class ShadowLenghtAdapter : MonoBehaviour {
         MenuUIManager.ChangeShadow -= Adapt;
         HomeUIManager.ChangeShadow -= Adapt;
         GameUIManager.ChangeShadow -= Adapt;
+        ShopUIManager.ChangeShadow -= Adapt;
 
     }
 }
