@@ -358,8 +358,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 188, y: 718}
-  m_SizeDelta: {x: 300, y: 350}
+  m_AnchoredPosition: {x: 216.90002, y: 269}
+  m_SizeDelta: {x: 320, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180163129
 MonoBehaviour:
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8113208, g: 0.7469374, b: 0.66206837, a: 0}
+  m_Color: {r: 0.8113208, g: 0.7469374, b: 0.66206837, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -531,7 +531,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 8.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -823,8 +823,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -241.5, y: 457}
-  m_SizeDelta: {x: 483, y: 914}
+  m_AnchoredPosition: {x: -200, y: 200}
+  m_SizeDelta: {x: 260, y: 260}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &319567315
 MonoBehaviour:
@@ -879,7 +879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.8078432, g: 0.74509805, b: 0.65882355, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1066,7 +1066,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 451563915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.57, y: 0.58, z: 0}
+  m_LocalPosition: {x: -6.14, y: 0.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 913517376}
@@ -1519,8 +1519,8 @@ MonoBehaviour:
   enemyArray:
   - {fileID: 1879798329601382, guid: be7fe67e2432a4a4d9737158a8c2cd93, type: 2}
   - {fileID: 1028987216407312, guid: fefd66bfd2cb5a34ebcbdfd8ecffde86, type: 2}
-  UpPosition: 3.8
-  DownPosition: -3.5
+  UpPosition: 4
+  DownPosition: -3.3
   MaxNormalEnemy: 5
   MaxGrandeEnemy: 2
   actualNormalEnemy: 0
@@ -2033,7 +2033,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 976381208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.35, y: 0.4, z: 0}
+  m_LocalPosition: {x: -8.3, y: 0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 977247532}
@@ -2054,8 +2054,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigid: {fileID: 976381209}
   movementSpeed: 4
-  maxHeight: 3.8
-  minHeight: -3.5
+  maxHeight: 4
+  minHeight: -3.3
   moveUp: 0
   moveDown: 0
 --- !u!1 &977247531
@@ -3507,6 +3507,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1779332195577010, guid: c8a6b4bc45a657641818837bbbc27e31, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8a6b4bc45a657641818837bbbc27e31, type: 2}
   m_IsPrefabAsset: 0
@@ -3637,8 +3641,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 188, y: 355}
-  m_SizeDelta: {x: 300, y: 350}
+  m_AnchoredPosition: {x: 216.90002, y: 130}
+  m_SizeDelta: {x: 320, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1950594177
 MonoBehaviour:
@@ -3693,7 +3697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8113208, g: 0.7469374, b: 0.66206837, a: 0}
+  m_Color: {r: 0.8113208, g: 0.7469374, b: 0.66206837, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

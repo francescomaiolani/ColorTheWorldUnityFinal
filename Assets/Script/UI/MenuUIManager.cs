@@ -21,6 +21,7 @@ public class MenuUIManager : MonoBehaviour {
     public GameObject weaponBoughtPanel;
     public Image weaponBoughtImage;
 
+
     //public Text weaponPrice;
     public Text weaponLevel;
 
@@ -52,12 +53,12 @@ public class MenuUIManager : MonoBehaviour {
         damageBar.value = selectedWeapon.damageIndicator;
         fireRateBar.value = selectedWeapon.fireRateIndicator;
         heatingBar.value = selectedWeapon.heatingRateIndicator;
-        LoadSprite(selectedWeapon.name, selectedWeapon.acquired);
+        LoadWeaponSprite(selectedWeapon.name, selectedWeapon.acquired);
         UpdateBuyButton();
         ChangeShadow();
     }
 
-    void LoadSprite(string name, bool acquired) {
+    void LoadWeaponSprite(string name, bool acquired) {
         if (!acquired) {
             Sprite[] allSprites = Resources.LoadAll<Sprite>("WeaponSpriteBig/AllWeaponCoverBig");
             foreach (Sprite s in allSprites) {

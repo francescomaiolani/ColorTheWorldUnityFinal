@@ -9,6 +9,19 @@ public class UINavigation : MonoBehaviour {
 
     public GameObject mask, orangePanel;
 
+    private void Start()
+    {
+        mask.SetActive(true);
+        orangePanel.SetActive(true);
+        mask.GetComponent<Animator>().SetTrigger("SceneStart");
+        Invoke("DeactivateSceneChange", 0.3f);
+    }
+
+    void DeactivateSceneChange() {
+        mask.SetActive(false);
+        orangePanel.SetActive(false);
+    }
+
     public void ChangeScene()
     {
         SceneManager.LoadSceneAsync(sceneToChange);
@@ -20,7 +33,9 @@ public class UINavigation : MonoBehaviour {
             sceneToChange = sceneName;
             mask.SetActive(true);
             orangePanel.SetActive(true);
-            Invoke("ChangeScene", 1.1f);
+            mask.GetComponent<Animator>().SetTrigger("SceneEnd");
+
+            Invoke("ChangeScene", 0.40f);
         }
 
         else
@@ -28,20 +43,4 @@ public class UINavigation : MonoBehaviour {
        
     }
 
-    /*public void GoToHome() {
-        SceneManager.LoadSceneAsync("Home");
-    }
-
-    public void GoToShop()  {
-        SceneManager.LoadSceneAsync("Shop");
-    }
-
-    public void GoToGame() {
-        SceneManager.LoadSceneAsync("Game");
-    }
-
-    public void GoToMenu()
-    {
-        SceneManager.LoadSceneAsync("Menu");
-    }*/
 }
