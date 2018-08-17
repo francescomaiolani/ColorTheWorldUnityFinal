@@ -23,7 +23,7 @@ public class HomeUIManager : MonoBehaviour {
         goldText.text = gameController.resourceManager.FindResource("gold").GetAmount().ToString();
         gemsText.text = gameController.resourceManager.FindResource("gems").GetAmount().ToString();
 
-        ChangeShadow();
+        //ChangeShadow();
     }
 
     private void OnDisable()

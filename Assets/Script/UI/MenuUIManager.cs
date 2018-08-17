@@ -42,20 +42,20 @@ public class MenuUIManager : MonoBehaviour {
         goldText.text = gameController.resourceManager.FindResource("gold").GetAmount().ToString();
         gemsText.text = gameController.resourceManager.FindResource("gems").GetAmount().ToString();
 
-        ChangeShadow();
+        //ChangeShadow();
     }
 
     void UpdateWeaponPanel() {
         Weapon selectedWeapon = gameController.lastSelectedWeapon;
         weaponLevel.text = selectedWeapon.level.ToString();
-        weaponName.text = selectedWeapon.name;
+        weaponName.text = selectedWeapon.name.ToUpper();
         //weaponPrice.text = selectedWeapon.goldCost.ToString();
         damageBar.value = selectedWeapon.damageIndicator;
         fireRateBar.value = selectedWeapon.fireRateIndicator;
         heatingBar.value = selectedWeapon.heatingRateIndicator;
         LoadWeaponSprite(selectedWeapon.name, selectedWeapon.acquired);
         UpdateBuyButton();
-        ChangeShadow();
+        //ChangeShadow();
     }
 
     void LoadWeaponSprite(string name, bool acquired) {

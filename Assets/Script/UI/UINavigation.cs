@@ -11,10 +11,12 @@ public class UINavigation : MonoBehaviour {
 
     private void Start()
     {
+
         mask.SetActive(true);
         orangePanel.SetActive(true);
         mask.GetComponent<Animator>().SetTrigger("SceneStart");
         Invoke("DeactivateSceneChange", 0.3f);
+       
     }
 
     void DeactivateSceneChange() {

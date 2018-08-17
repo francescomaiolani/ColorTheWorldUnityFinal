@@ -24,6 +24,7 @@ public class Weapon {
     public float heatingRateIndicator;
 
     public int cardNumber;
+    public int cardRarity;
 
     public Weapon(string name, string description, float damagexBullet, float fireRate, float reloadTick, float heatingTick, int bulletCount, int perforante, float bulletSpread)
     {

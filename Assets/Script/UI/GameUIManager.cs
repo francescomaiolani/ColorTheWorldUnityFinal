@@ -27,7 +27,7 @@ public class GameUIManager : MonoBehaviour {
     void UpdateText() {
         goldText.text = gameController.resourceManager.FindResource("gold").GetAmount().ToString();
         gemsText.text = gameController.resourceManager.FindResource("gems").GetAmount().ToString();
-        ChangeShadow();
+        //ChangeShadow();
     }
 
     public void AddSpecialPoint(float amount) {

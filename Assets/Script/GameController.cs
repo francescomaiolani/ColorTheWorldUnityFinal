@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour {
 
         Application.targetFrameRate = 60;
         EnemyVariable.EnemyDeadGold += AddGold;
+        GameChest.GiveGold += AddGold;
         PlayerPrefs.SetString("LittleGunacquired", "true");
         PlayerPrefs.SetInt("LittleGunlevel", 1);
 
@@ -63,12 +64,19 @@ public class GameController : MonoBehaviour {
                 w.cardNumber = 0;
         }
 
+        Debug.Log(PlayerPrefs.GetString("lastUsedWeapon"));
         //ASSEGNA L'ARMA INIZIALE SULLA BASE DI COSA HAI USATO PER ULTIMO
-        actualWeapon = FindWeapon(PlayerPrefs.GetString("lastUsedWeapon"));
-        if (actualWeapon == null)  
+        if (FindWeapon(PlayerPrefs.GetString("lastUsedWeapon")) == null)
             actualWeapon = FindWeapon("LittleGun");
+        else
+            actualWeapon = FindWeapon(PlayerPrefs.GetString("lastUsedWeapon"));
+
+        Debug.Log(actualWeapon.name);
 
         lastSelectedWeapon = actualWeapon;
+        Debug.Log(lastSelectedWeapon.name);
+        Debug.Log(lastSelectedWeapon.acquired);
+
         ChangedStats();
     }
 
@@ -83,7 +91,7 @@ public class GameController : MonoBehaviour {
         allWeapon[0].level = 1;
 
         SaveAllData();
-        ChangedStats();
+        LoadSavedVariable();
     }
 
     public void SaveAllData() {
@@ -123,15 +131,26 @@ public class GameController : MonoBehaviour {
 
     }
 
-
+    //METODO CHE RESTITUISCE L'OGGETTO ARMA CON NOME INDICATO
     public Weapon FindWeapon(string nome) {
         foreach (Weapon w in allWeapon) {
             if (w.name == nome)
                 return w;
         }
-
         return null;
     }
+
+    //METODO CHE RITORNA LA LISTA DI TUTTE LE ARMI POSSEDUTE 
+    public List<Weapon> GetAcquiredWeapon() {
+        List<Weapon> list = new List<Weapon>();
+        foreach (Weapon w in allWeapon) {
+            if (w.acquired == true)
+                list.Add(w);
+        }
+        return list;
+    }
+
+    //METODO CHE CONTROLLA SE SI HA ABBASTANZA ORO PER COMPRARE QUALCOSA
     public bool CheckIfEnoughGold(int amount) {
         if (amount <= resourceManager.FindResource("gold").GetAmount())
             return true;
