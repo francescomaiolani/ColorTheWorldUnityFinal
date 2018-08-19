@@ -21,9 +21,12 @@ public class BuyableCard: MonoBehaviour {
     int cost;
 
     public Sprite specialBackground;
+    public Sprite specialTitleBackground;
+
     public Sprite rays;
     public Image background;
     public Image greyBackground;
+    public Image titleBackground;
     public Image raysImage;
     public Text nameText;
     public Image cardTypeImage;
@@ -49,8 +52,9 @@ public class BuyableCard: MonoBehaviour {
         if (special)
         {
             background.overrideSprite = specialBackground;
+            titleBackground.overrideSprite = specialTitleBackground;
             raysImage.overrideSprite = rays;
-            greyBackground.color = new Color32(255,211,136,255);
+            greyBackground.color = new Color32(255,224,116,200);
             //background.rectTransform.sizeDelta = new Vector2(600,740);
             cardTypeImage.sprite = Resources.Load<Sprite>("BuyableCard/" + type + "CardTypeOrangeIcon");
         }
@@ -62,7 +66,7 @@ public class BuyableCard: MonoBehaviour {
         //ANCORA DA ASSEGNARE QUESTO
         cardImage.sprite = Resources.Load<Sprite>(imagePath);
         amountText.text = "x" + amount.ToString();
-        costText.text = cost.ToString();
+        costText.text = HomeUIManager.ConvertCostToString(cost);
         costImage.sprite = Resources.Load<Sprite>("BuyableCard/" + costType);
 
         SetNativeSizeImage();
@@ -70,6 +74,12 @@ public class BuyableCard: MonoBehaviour {
 
     public void SetNativeSizeImage() {
         cardImage.SetNativeSize();
+        if (special) {
+            titleBackground.SetNativeSize();
+            //SPOSTA AL CENTRO DELLA CARTA IL CONTAINER DEL TITOLO
+            titleBackground.rectTransform.anchoredPosition = new Vector2(titleBackground.rectTransform.sizeDelta.x / 2, -titleBackground.rectTransform.sizeDelta.y / 2);
+
+        }
 
     }
 

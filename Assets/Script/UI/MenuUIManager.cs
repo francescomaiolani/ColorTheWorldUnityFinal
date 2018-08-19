@@ -6,13 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class MenuUIManager : MonoBehaviour {
 
-    public Text goldText, gemsText;
+    public Text goldText, gemsText, levelText;
     GameController gameController;
+
+    public Image[] leftPanelWeapon;
 
     public Slider damageBar, fireRateBar, heatingBar;
     public Text weaponName;
     public Button buyWeapon;
     public Text buyWeaponText;
+    public Image goldIcon;
     public Image weaponImage;
     public Image LightRay;
     public ShadowLenghtAdapter weaponShadow;
@@ -35,14 +38,15 @@ public class MenuUIManager : MonoBehaviour {
         GameController.ChangedStats += UpdateWeaponPanel;
         UpdateText();
         UpdateWeaponPanel();
+        UpdateLeftPanelWeapon();
     }
 
     void UpdateText()
     {
-        goldText.text = gameController.resourceManager.FindResource("gold").GetAmount().ToString();
-        gemsText.text = gameController.resourceManager.FindResource("gems").GetAmount().ToString();
+        goldText.text = HomeUIManager.ConvertCostToString(gameController.resourceManager.FindResource("gold").GetAmount());
+        gemsText.text = HomeUIManager.ConvertCostToString(gameController.resourceManager.FindResource("gems").GetAmount());
+        levelText.text = gameController.resourceManager.FindResource("level").GetAmount().ToString();
 
-        //ChangeShadow();
     }
 
     void UpdateWeaponPanel() {
@@ -53,20 +57,37 @@ public class MenuUIManager : MonoBehaviour {
         damageBar.value = selectedWeapon.damageIndicator;
         fireRateBar.value = selectedWeapon.fireRateIndicator;
         heatingBar.value = selectedWeapon.heatingRateIndicator;
-        LoadWeaponSprite(selectedWeapon.name, selectedWeapon.acquired);
+        //CARICAMENTO DELL'IMMAGINE DELL'ARMA
+        Sprite weaponSprite = LoadWeaponSprite(selectedWeapon.name, selectedWeapon.acquired);
+        weaponImage.sprite = weaponSprite;
+        weaponImage.rectTransform.sizeDelta = new Vector2(weaponImage.sprite.rect.width * 1.15f, weaponImage.sprite.rect.height * 1.15f);
+        //weaponShadow.imageReference = weaponImage;
+        if (selectedWeapon.acquired)
+            LightRay.gameObject.SetActive(true);
+        else
+            LightRay.gameObject.SetActive(false);
+
+        weaponShadow.Adapt();
         UpdateBuyButton();
-        //ChangeShadow();
     }
 
-    void LoadWeaponSprite(string name, bool acquired) {
+    void UpdateLeftPanelWeapon() {
+        List<Weapon> allWeapon = gameController.GetAllWeaponList();
+
+        for (int i = 0; i < leftPanelWeapon.Length; i++) {
+            leftPanelWeapon[i].sprite = LoadWeaponSprite(allWeapon[i].name, allWeapon[i].acquired);
+            //leftPanelWeapon[i].SetNativeSize();
+        }
+    }
+
+    Sprite LoadWeaponSprite(string name, bool acquired) {
+        Sprite returnSprite = null;
         if (!acquired) {
             Sprite[] allSprites = Resources.LoadAll<Sprite>("WeaponSpriteBig/AllWeaponCoverBig");
             foreach (Sprite s in allSprites) {
                 if (s.name == name + "Cover")
-                    weaponImage.sprite = s;
+                    returnSprite = s;               
             }
-
-            LightRay.gameObject.SetActive(false);
         }
         else if (acquired)
         {
@@ -74,29 +95,27 @@ public class MenuUIManager : MonoBehaviour {
             foreach (Sprite s in allSprites)
             {
                 if (s.name == name)
-                    weaponImage.sprite = s;
+                    returnSprite = s;
             }
             LightRay.gameObject.SetActive(true);
-
         }
-
-        weaponImage.rectTransform.sizeDelta = new Vector2(weaponImage.sprite.rect.width, weaponImage.sprite.rect.height);
-        weaponShadow.imageReference = weaponImage;
-        weaponShadow.Adapt();
+        return returnSprite;
     }
     void UpdateBuyButton() {
 
         if (gameController.lastSelectedWeapon.acquired == true)  {
             buyWeaponText.text = "EQUIP";
+            goldIcon.gameObject.SetActive(false);
             buyWeapon.interactable = true;
         }
         else if (gameController.lastSelectedWeapon.levelToAcquire > gameController.resourceManager.FindResource("level").GetAmount())  {
             buyWeaponText.text = "HIGHER LEVEL REQUIRED";
+            goldIcon.gameObject.SetActive(false);
             buyWeapon.interactable = false;
-
         }
         else if (!gameController.lastSelectedWeapon.acquired && gameController.lastSelectedWeapon.levelToAcquire <= gameController.resourceManager.FindResource("level").GetAmount()) {
-            buyWeaponText.text = "BUY " + gameController.lastSelectedWeapon.goldCost.ToString();
+            buyWeaponText.text = HomeUIManager.ConvertCostToString(gameController.lastSelectedWeapon.goldCost);
+            goldIcon.gameObject.SetActive(true);
             buyWeapon.interactable = true;
         }
 
@@ -122,6 +141,8 @@ public class MenuUIManager : MonoBehaviour {
             UpdateWeaponPanel();
             UpdateBuyButton();
             ShowWeaponBoughtPanel(weaponImage.sprite);
+            UpdateLeftPanelWeapon();
+
         }
         else
             Debug.Log("Not enough gold or weapon already owned");

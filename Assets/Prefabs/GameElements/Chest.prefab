@@ -69,7 +69,7 @@ Transform:
   m_GameObject: {fileID: 1370502118407678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4869107481685748}
   - {fileID: 4851179484375836}
@@ -83,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1418509960560094}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.54, z: 0}
+  m_LocalPosition: {x: 0, y: -0.37, z: 0}
   m_LocalScale: {x: 0.6756987, y: 3.066186, z: 1.172}
   m_Children: []
   m_Father: {fileID: 4814371743796222}
@@ -97,7 +97,7 @@ Transform:
   m_GameObject: {fileID: 1945640442972050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4814371743796222}
   m_RootOrder: 0
@@ -118,8 +118,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.96, y: 0.96}
-    newSize: {x: 0.96, y: 0.96}
+    oldSize: {x: 0.63, y: 0.72}
+    newSize: {x: 0.63, y: 0.72}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -166,6 +166,11 @@ MonoBehaviour:
   maxSpecialValue: 10
   chestContainer: {fileID: 1370502118407678}
   sprite: {fileID: 212252759832658180}
+  differentType:
+  - {fileID: 21300000, guid: 661834b71c8942743ab5f792fa458b7d, type: 3}
+  - {fileID: 21300000, guid: 0b5cacb106200b94f81c8ee707415f09, type: 3}
+  - {fileID: 21300000, guid: 0bcfdb901bc034d4c9f13b18eb929188, type: 3}
+  - {fileID: 21300000, guid: 0bcfdb901bc034d4c9f13b18eb929188, type: 3}
 --- !u!212 &212252538057665562
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -247,12 +252,12 @@ SpriteRenderer:
   m_SortingLayerID: -1811713011
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300004, guid: 0acffd9eba437b64d97ab9fbb319d6b2, type: 3}
-  m_Color: {r: 1, g: 0.95488113, b: 0.514151, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 661834b71c8942743ab5f792fa458b7d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.96, y: 0.96}
+  m_Size: {x: 0.63, y: 0.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -21,11 +21,13 @@ public class EnemyVariable : MonoBehaviour {
 
     public CapsuleCollider2D capsuleCollider;
     public BoxCollider2D wallCollider;
-    public EnemyMovement enemyMovement; 
+    public EnemyMovement enemyMovement;
 
     public delegate void OnEnemyDeadGold(int gold);
     public delegate void OnEnemyDeadSpecialPoint(float specialPoint);
     public delegate void OnEnemyDeadRemoveTimer(Timer timer);
+    public delegate void OnEnemyDeadResourceText(int gold, Vector2 position, string tipo);
+
     public delegate void OnTimerCreated(Timer timer);
     public delegate void OnAttackDone(float amount);
 
@@ -33,6 +35,8 @@ public class EnemyVariable : MonoBehaviour {
     public static event OnEnemyDeadGold EnemyDeadGold;
     public static event OnEnemyDeadSpecialPoint EnemyDeadSpecialPoint;
     public static event OnEnemyDeadRemoveTimer EnemyDeadRemoveTimer;
+    public static event OnEnemyDeadResourceText EnemyDeadSpawnResourceText;
+
     public static event OnTimerCreated TimerCreated;
     public static event OnAttackDone ApplyWallDamage;
 
@@ -60,10 +64,10 @@ public class EnemyVariable : MonoBehaviour {
     public void Dead() {
         EnemyDeadGold(goldGiven);
         EnemyDeadSpecialPoint(specialPointGiven);
+        EnemyDeadSpawnResourceText(goldGiven, transform.position, "gold");
+
         if (attackRateTimer != null)
             EnemyDeadRemoveTimer(attackRateTimer);
-        Debug.Log("Do Special Point e gold");
-
 
         capsuleCollider.enabled = false;
         wallCollider.enabled = false;
@@ -73,14 +77,11 @@ public class EnemyVariable : MonoBehaviour {
             attackRateTimer.TimerEnded -= AttackTimerOver;
         }
         enemyMovement.ReachedWall -= WallReached;
-
         Destroy(this.gameObject);
     }
 
     public void Attack() {
         ApplyWallDamage(damage);
-        Debug.Log("Attacco il muro");
-
     }
 
     public void WallReached() {
@@ -88,12 +89,10 @@ public class EnemyVariable : MonoBehaviour {
         attackRateTimer.TimerEnded += AttackTimerOver;
         TimerCreated(attackRateTimer);
         wallReached = true;
-        Debug.Log("Ho Raggiunto il Muro");
-
     }
 
     public void AttackTimerOver() {
-        Debug.Log("Timer Attacco Finito");
         Attack();
     }
+
 }

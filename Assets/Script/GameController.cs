@@ -38,7 +38,6 @@ public class GameController : MonoBehaviour {
         PlayerPrefs.SetString("LittleGunacquired", "true");
         PlayerPrefs.SetInt("LittleGunlevel", 1);
 
-
         PopulateAllWeapon();
         LoadSavedVariable();
     }
@@ -64,19 +63,13 @@ public class GameController : MonoBehaviour {
                 w.cardNumber = 0;
         }
 
-        Debug.Log(PlayerPrefs.GetString("lastUsedWeapon"));
         //ASSEGNA L'ARMA INIZIALE SULLA BASE DI COSA HAI USATO PER ULTIMO
         if (FindWeapon(PlayerPrefs.GetString("lastUsedWeapon")) == null)
             actualWeapon = FindWeapon("LittleGun");
         else
             actualWeapon = FindWeapon(PlayerPrefs.GetString("lastUsedWeapon"));
 
-        Debug.Log(actualWeapon.name);
-
         lastSelectedWeapon = actualWeapon;
-        Debug.Log(lastSelectedWeapon.name);
-        Debug.Log(lastSelectedWeapon.acquired);
-
         ChangedStats();
     }
 
@@ -120,7 +113,7 @@ public class GameController : MonoBehaviour {
         allWeapon.Add(new Weapon("Uzi", "", 12, 0.24f, 2f, 1.25f, 1, 1, 0));
         allWeapon.Add(new Weapon("Assault", "", 20, 0.3f, 2f, 1.25f, 1, 1, 0));
         allWeapon.Add(new Weapon("Shotgun", "", 20, 1f, 2f, 1.25f, 5, 1, 4));
-        allWeapon.Add(new Weapon("Sniper", "", 100, 0.8f, 2f, 1.25f, 5, 1, 4));
+        allWeapon.Add(new Weapon("Sniper", "", 100, 0.8f, 2f, 1.25f, 1, 3, 0));
 
         allWeapon[0].SetShopWeaponStats(0, 0, 8, 50, 40, 40);
         allWeapon[1].SetShopWeaponStats(0, 1000, 12, 45, 40, 40);
@@ -179,7 +172,11 @@ public class GameController : MonoBehaviour {
     }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//GETTERS
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //GETTERS
+
+    public List<Weapon> GetAllWeaponList() {
+        return allWeapon;
+    }
    
 }

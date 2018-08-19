@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShopUIManager : MonoBehaviour {
 
-    public Text goldText, gemsText;
+    public Text goldText, gemsText, levelText;
     GameController gameController;
     public delegate void OnShadowToChange();
     public static event OnShadowToChange ChangeShadow;
@@ -28,10 +28,9 @@ public class ShopUIManager : MonoBehaviour {
 
     void UpdateText()
     {
-        goldText.text = gameController.resourceManager.FindResource("gold").GetAmount().ToString();
-        gemsText.text = gameController.resourceManager.FindResource("gems").GetAmount().ToString();
-
-        //ChangeShadow();
+        goldText.text = HomeUIManager.ConvertCostToString(gameController.resourceManager.FindResource("gold").GetAmount());
+        gemsText.text = HomeUIManager.ConvertCostToString(gameController.resourceManager.FindResource("gems").GetAmount());
+        levelText.text = gameController.resourceManager.FindResource("level").GetAmount().ToString();
     }
 
 
@@ -70,7 +69,11 @@ public class ShopUIManager : MonoBehaviour {
         List<Weapon> acquiredWeapon = gameController.GetAcquiredWeapon();
         int weaponIndex = Random.Range(0, acquiredWeapon.Count);
         Weapon chosenWeapon = acquiredWeapon[weaponIndex];
-        cardCreated.SetCardStats("Weapon", chosenWeapon.name, "BuyableCard/Weapon/" + chosenWeapon.name,Random.Range(5,50),  "gold", 1000, specialCard );
+        if (specialCard)
+            cardCreated.SetCardStats("Weapon", chosenWeapon.name, "BuyableCard/Weapon/" + chosenWeapon.name , Random.Range(40,50),  "gold", 5000, specialCard );
+        else
+            cardCreated.SetCardStats("Weapon", chosenWeapon.name, "BuyableCard/Weapon/" + chosenWeapon.name, Random.Range(8, 20), "gold", 1000, specialCard);
+
     }
 
     void CreateWallCard(int index, bool specialCard)
@@ -93,7 +96,7 @@ public class ShopUIManager : MonoBehaviour {
         //AGGIUSTA LA POSIZIONE E LO SCALE NEL CANVAS CHE SONO SBALLATE SE NO
         RectTransform transformComponent = card.GetComponent<RectTransform>();
         transformComponent.localScale = new Vector3(1, 1, 1);
-        transformComponent.anchoredPosition = new Vector2(-440 + index * 440, 0);
+        transformComponent.anchoredPosition = new Vector2(-440 + index * 440, -50);
 
         return cardComponent;
     }

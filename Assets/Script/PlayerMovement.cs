@@ -1,56 +1,110 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class PlayerMovement : MonoBehaviour {
 
+public class PlayerMovement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+{
+
+    public Transform player;
     public Rigidbody2D rigid;
     public float movementSpeed;
     public float maxHeight;
     public float minHeight;
-    public bool moveUp;
-    public bool moveDown;
+    bool moveUp;
+    bool moveDown;
 
+    float offset = 0.5f;
+    Vector3 globalMousePos;
+    bool move;
+    public RectTransform slider;
+    public RectTransform handle;
+    float initialOffset;
+    bool dragging;
+    float maxRange;
+    /*
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        SetDraggedPosition(eventData);
+    }
+
+
+    public void OnDrag(PointerEventData data)
+    {
+        SetDraggedPosition(data);
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Stop();
+    }
+
+    private void SetDraggedPosition(PointerEventData data)
+    {
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, data.position, data.pressEventCamera, out globalMousePos))
+        {
+            if (globalMousePos.y > player.transform.position.y + offset && player.position.y <= maxHeight)         
+                moveUp = true;
+            
+            else if (globalMousePos.y < player.transform.position.y - offset && player.position.y >= minHeight)
+                moveDown = true;
+        }
+        else
+            Stop();
+    }
 
     private void Update()
     {
-        if (transform.position.y >= maxHeight && moveUp) {
-            moveUp = false;
+        if (moveUp && globalMousePos.y > player.transform.position.y + offset && player.position.y <= maxHeight)
+            rigid.velocity = new Vector2(0, movementSpeed);
+        else if (moveDown && globalMousePos.y < player.transform.position.y - offset && player.position.y >= minHeight)
+            rigid.velocity = new Vector2(0, -movementSpeed);
+        else
             Stop();
-            transform.position = new Vector3(transform.position.x, maxHeight, transform.position.x);
-        }
-        else if (transform.position.y <=  minHeight && moveDown)
-        {
-            moveDown = false;
-            Stop();
-            transform.position = new Vector3(transform.position.x, minHeight, transform.position.x);
-        }
 
-
-
+    }*/
+    private void Start()
+    {
+        initialOffset = slider.anchoredPosition.y;
+        maxRange = slider.sizeDelta.y / 2;
     }
-    public void StartMoveUp() {
-        moveUp = true;
-        rigid.velocity = new Vector2(0, movementSpeed);
-    }
-
-    public void StartMoveDown() {
-        moveDown = true;
-        rigid.velocity = new Vector2(0, -movementSpeed);
-    }
-
-    public void EndMoveUp()  {
+    public void Stop()
+    {
         moveUp = false;
-        Stop();
-    }
-
-    public void EndMoveDown() {
         moveDown = false;
-        Stop();
-    }
-
-    public void Stop() {
         rigid.velocity = new Vector2(0, 0);
     }
 
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        dragging = true;
+        DragHandler(eventData);
+    }
+
+    void DragHandler(PointerEventData eventData)
+    {
+        if (eventData.position.y > handle.position.y)
+        {
+            handle.anchoredPosition = new Vector2(handle.anchoredPosition.x, Mathf.Clamp(eventData.position.y - maxRange, 0, maxRange));
+        }
+        
+        else if (eventData.position.y < handle.position.y)
+        {
+            handle.anchoredPosition = new Vector2(handle.anchoredPosition.x, Mathf.Clamp(-eventData.position.y + maxRange, -maxRange, 0));
+        }
+    }
+
+    public void OnDrag(PointerEventData data)
+    {
+        DragHandler(data);
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        dragging = false;
+        handle.anchoredPosition = new Vector2(0, 0);
+        Stop();
+    }
+
 }
+

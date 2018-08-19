@@ -25,8 +25,6 @@ public class PlayerWeapon : MonoBehaviour {
 	void Start () {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         actualWeapon = gameController.actualWeapon;
-        Debug.Log(actualWeapon.name);
-
         actualHeating = 100;
         AssignTimer();
         InvokeRepeating("UpdateHeating", 0, 0.05f);

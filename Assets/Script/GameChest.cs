@@ -21,12 +21,13 @@ public class GameChest : MonoBehaviour {
     public int maxSpecialValue;
     public GameObject chestContainer;
     public SpriteRenderer sprite;
+    public Sprite[] differentType;
 
     string chestType;
 
     private void Start()
     {
-        sprite.sprite = Resources.Load<Sprite>("ShopButton/WeaponCardTypeOrangeIcon");
+        AssignChestType("gold");
     }
 
     public void AssignChestType(string tipo) {
@@ -38,6 +39,19 @@ public class GameChest : MonoBehaviour {
             chestType = "life";
         else if (tipo == "special")
             chestType = "special";
+
+        AssignSprite();
+    }
+
+    void AssignSprite() {
+        if (chestType == "gold")
+            sprite.sprite = differentType[0];
+        else if (chestType == "bigGold")
+            sprite.sprite = differentType[1];
+        else if (chestType == "life")
+            sprite.sprite = differentType[2];
+        else if (chestType == "special")
+            sprite.sprite = differentType[3];
     }
 
     private void OnMouseEnter()
