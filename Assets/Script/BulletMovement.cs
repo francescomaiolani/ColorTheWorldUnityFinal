@@ -9,6 +9,7 @@ public class BulletMovement : MonoBehaviour {
     public Rigidbody2D rigid;
     public int perforante;
     public float damage;
+    public GameObject spruzzo;
     //QUANTI ALLA VOLTA
     public int count;
     //VARIAZIONE DEL'ANGOLO A SECONDA DI QUANTI SONO
@@ -33,6 +34,9 @@ public class BulletMovement : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Enemy") {
             collision.GetComponent<EnemyVariable>().ApplyDamage(damage);
+            collision.GetComponent<EnemyVariable>().SpawnSpotOnBody(transform.position);
+            GameObject spruzzoInstance = Instantiate(spruzzo, transform.position, Quaternion.identity);
+            Destroy(spruzzoInstance, 1f);
             perforante--;
             if (perforante <= 0) {
                 Destroy(this.gameObject);

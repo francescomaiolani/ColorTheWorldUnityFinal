@@ -23,6 +23,7 @@ public class MenuUIManager : MonoBehaviour {
     public GameObject blackPanel;
     public GameObject weaponBoughtPanel;
     public Image weaponBoughtImage;
+    public Text weaponBoughtName;
 
 
     //public Text weaponPrice;
@@ -153,6 +154,7 @@ public class MenuUIManager : MonoBehaviour {
         weaponBoughtPanel.SetActive(true);
         weaponBoughtImage.sprite = weaponSprite;
         weaponBoughtImage.SetNativeSize();
+        weaponBoughtName.text = gameController.lastSelectedWeapon.name.ToUpper();
         Invoke("CloseWeaponBoughtPanel", 3f);
     }
     void CloseWeaponBoughtPanel() {

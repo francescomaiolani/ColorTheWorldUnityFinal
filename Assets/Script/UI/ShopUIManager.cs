@@ -14,6 +14,10 @@ public class ShopUIManager : MonoBehaviour {
     public GameObject buyableCardPrefab;
     public GameObject cardPanel;
 
+    public List<Card> chestCard;
+    public GameObject card;
+    public GameObject goldenCard;
+    public GameObject chestCardPanel;
 
 
     private void Start()
@@ -104,6 +108,87 @@ public class ShopUIManager : MonoBehaviour {
     void AddCardToCardArray(BuyableCard component, int index) {
         buyableCards[index] = component;
     }
+    public void BuyChest(string chestType) {
+
+        int cost = SelectChestCost(chestType);
+        string costType = SelectChestCostType(chestType);
+
+        if (costType == "gold" && gameController.CheckIfEnoughGold(cost))
+        {
+            gameController.AddGold(-cost);
+            CreateChestCard(Random.Range(3, 5));
+        }
+        else if (costType == "gems" && gameController.CheckIfEnoughGems(cost)) {
+            gameController.AddGems(-cost);
+            CreateChestCard(Random.Range(3, 5));
+        }
+
+    }
+
+    string SelectChestCostType(string type) {
+
+        if (type == "platinum")
+            return "gems";
+        else
+            return "gold";
+    }
+    int SelectChestCost(string chestType) {
+        switch (chestType) {
+            case "iron":
+                return 500;
+            case "bronze":
+                return 1000;
+            case "silver":
+                return 2000;
+            case "gold":
+                return 5000;
+            case "platinum":
+                return 50;
+        }
+        return 0;
+    }
+
+    public void CreateChestCard(int cardAmount )
+    {
+        chestCard = new List<Card>();
+        int special = 0;
+        chestCardPanel.SetActive(true);
+
+        for (int i = 0; i < cardAmount; i++)
+        {
+            if (i == cardAmount - 1)
+                special = Random.Range(0, 100);
+
+            if (special < 50)
+            {
+                GameObject cardInstance = Instantiate(card, new Vector3(0, 0, 0), Quaternion.identity, chestCardPanel.transform);
+                cardInstance.transform.localScale = new Vector3(1, 1, 1);
+                cardInstance.transform.localPosition = new Vector3(-400 *(i - cardAmount/2),0, 0);
+                Card cardComponent = cardInstance.GetComponent<Card>();
+                chestCard.Add(cardComponent);
+            }
+            else {
+                GameObject cardInstance = Instantiate(goldenCard, new Vector3(0, 0, 0), Quaternion.identity, chestCardPanel.transform);
+                cardInstance.transform.localScale = new Vector3(1, 1, 1);
+                cardInstance.transform.localPosition = new Vector3(-400*(i - cardAmount / 2), 0, 0);
+                Card cardComponent = cardInstance.GetComponent<Card>();
+                chestCard.Add(cardComponent);
+
+            }
+        }
+    }
+
+    public void CollectChestCard() {
+        foreach (Card c in chestCard) {
+            if (c.GetCardType() == "weapon")
+                gameController.AddWeaponCard(c.GetTitle(), c.GetAmount());
+            Debug.Log("Added" + c.GetAmount());
+        }
+
+        chestCardPanel.SetActive(false);
+        gameController.SaveAllData();
+    }
+
 
 //////////////////////////////// FINE METODI PER LE CARTE ACQUISTABILI//////////////////////////////////////////
 

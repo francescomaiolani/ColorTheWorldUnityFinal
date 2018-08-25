@@ -435,6 +435,7 @@ MonoBehaviour:
   amountText: {fileID: 114593941039313310}
   costText: {fileID: 114031171443232540}
   costImage: {fileID: 114513903183458962}
+  buyCardButton: {fileID: 114185281430519794}
 --- !u!114 &114344364642751200
 MonoBehaviour:
   m_ObjectHideFlags: 1

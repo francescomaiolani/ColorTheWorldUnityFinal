@@ -1,0 +1,276 @@
+fileFormatVersion: 2
+guid: d41c06714b480c5479881b9415d98105
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: CinturinoDavantiNemicoPiccolo
+    21300002: CinturinoDietroNemicoPiccolo
+    21300004: CiuffoNemicoPiccolo
+    21300006: CascoDavantiNemicoPiccolo
+    21300008: CascoDietroNemicoPiccolo
+    21300010: CorpoNemicoPiccolo
+    21300012: GambaNemicoPiccolo
+    21300014: OmbraNemicoPiccolo
+  externalObjects: {}
+  serializedVersion: 6
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CinturinoDavantiNemicoPiccolo
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 252
+        width: 29
+        height: 59
+      alignment: 9
+      pivot: {x: 0.38800442, y: 0.95414966}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50a3d10783997fc4fad424844c8525ae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CinturinoDietroNemicoPiccolo
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 253
+        width: 22
+        height: 59
+      alignment: 9
+      pivot: {x: 0.49999964, y: 0.9403878}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30d6b52995158f344ab179488f75082d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CiuffoNemicoPiccolo
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 254
+        width: 43
+        height: 67
+      alignment: 9
+      pivot: {x: 0.72659516, y: 0.08795713}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 171b156814dcb5e45868aebead7a3e8f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CascoDavantiNemicoPiccolo
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 238
+        width: 150
+        height: 127
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fdcf722f867d7d438232267a6ffed07
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CascoDietroNemicoPiccolo
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 167
+        height: 123
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63e7b05190cbcc3448f57ed395f1e0fc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CorpoNemicoPiccolo
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 36
+        width: 129
+        height: 170
+      alignment: 9
+      pivot: {x: 0.43076247, y: 0.12745094}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b3fd84df2e5a4f4890d263599b06434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GambaNemicoPiccolo
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 164
+        width: 25
+        height: 50
+      alignment: 9
+      pivot: {x: 0.66239256, y: 0.8410254}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a7476a0ecad47f4381b5773d57484ce
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OmbraNemicoPiccolo
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 6
+        width: 108
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 659a0d24fb624f642aa5f4c78edc8f69
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 9728792262380ca43a7c16a80c6cbdea
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: Enemy
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

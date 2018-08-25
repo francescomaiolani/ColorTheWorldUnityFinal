@@ -27,7 +27,7 @@ public class EnemyMovement : MonoBehaviour {
         
     }
 
-    private void Stop() {
+    public void Stop() {
         rigid.velocity = new Vector2(0,0);
     }
 }

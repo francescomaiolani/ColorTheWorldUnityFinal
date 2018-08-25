@@ -10,6 +10,7 @@ public class GameUIManager : MonoBehaviour {
     GameController gameController;
     public Slider specialPointBar;
 
+
     public Camera mainCamera;
     float xConversionNumberToCanvas;
     float yConversionNumberToCanvas;
@@ -64,18 +65,18 @@ public class GameUIManager : MonoBehaviour {
 
     void SpawnResourceText(int amount, Vector2 position, string type) {
 
-        float offset = 20;
+        float offset =80;
         GameObject text = null;
 
         if (type == "gold")
-            text = Instantiate(goldTextPrefab, canvasTransform, false);
+            text = Instantiate(goldTextPrefab, canvasTransform, true);
         else if (type == "special")
-            text = Instantiate(specialTextPrefab, canvasTransform, false);
+            text = Instantiate(specialTextPrefab, canvasTransform, true);
         else if (type == "life")
-            text = Instantiate(lifeTextPrefab, canvasTransform, false);
+            text = Instantiate(lifeTextPrefab, canvasTransform, true);
 
         text.transform.localScale = new Vector3(1, 1, 1);
-        Vector3 newPosition = new Vector3(position.x * xConversionNumberToCanvas + offset , position.y * yConversionNumberToCanvas);
+        Vector3 newPosition = new Vector3(position.x * xConversionNumberToCanvas,position.y * yConversionNumberToCanvas + offset);
         text.transform.localPosition = newPosition;
         text.GetComponentInChildren<Text>().text = "+ " + amount.ToString();
         

@@ -9,10 +9,6 @@ public class TimerManager : MonoBehaviour {
   
 	// Use this for initialization
 	void Start () {
-
-        EnemyVariable.TimerCreated += AddTimer;
-        EnemyVariable.EnemyDeadRemoveTimer += RemoveTimer;
-
         InvokeRepeating("UpdateTimers", 0, updateRate);
 	}
 
@@ -54,6 +50,13 @@ public class Timer {
         actualTime = 0;
     }
 
+    public void ReassignTimer(float newMaxvalue) {
+        started = true;
+        stopped = false;
+        actualTime = 0;
+        maxTime = newMaxvalue;
+    }
+
     public void UpdateTimer(float updateTime) {
         if (!stopped) {
             actualTime += updateTime;
@@ -61,8 +64,7 @@ public class Timer {
             {
                 EndTimer();
             }
-        }
-           
+        }        
     }
 
     public void StopTimer() {

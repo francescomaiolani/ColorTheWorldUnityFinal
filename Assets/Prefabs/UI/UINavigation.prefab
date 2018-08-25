@@ -9,17 +9,17 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1161365728636490}
+  m_RootGameObject: {fileID: 1251501332763350}
   m_IsPrefabAsset: 1
---- !u!1 &1161365728636490
+--- !u!1 &1251501332763350
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4984809261555882}
-  - component: {fileID: 114512618974728486}
+  - component: {fileID: 4065570823563240}
+  - component: {fileID: 114318332428381952}
   m_Layer: 0
   m_Name: UINavigation
   m_TagString: Untagged
@@ -27,12 +27,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4984809261555882
+--- !u!4 &4065570823563240
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1161365728636490}
+  m_GameObject: {fileID: 1251501332763350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,14 +40,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114512618974728486
+--- !u!114 &114318332428381952
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1161365728636490}
+  m_GameObject: {fileID: 1251501332763350}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0c679ea8d9372e439470edaaa1ebed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToChange: 
+  mask: {fileID: 0}
+  orangePanel: {fileID: 0}
+  panelColor:
+  - serializedVersion: 2
+    rgba: 4294486995
+  - serializedVersion: 2
+    rgba: 4290504117
+  - serializedVersion: 2
+    rgba: 4294223615
+  - serializedVersion: 2
+    rgba: 4292083586
+  - serializedVersion: 2
+    rgba: 4286964735
+  - serializedVersion: 2
+    rgba: 4292669601
+  - serializedVersion: 2
+    rgba: 4286773503
+  - serializedVersion: 2
+    rgba: 4288859388
+  - serializedVersion: 2
+    rgba: 4293252533
+  - serializedVersion: 2
+    rgba: 4294765474
+  - serializedVersion: 2
+    rgba: 4287234012
+  - serializedVersion: 2
+    rgba: 4289723554
+  - serializedVersion: 2
+    rgba: 4293252533
+  - serializedVersion: 2
+    rgba: 4282635775
+  - serializedVersion: 2
+    rgba: 4288863638

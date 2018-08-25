@@ -9,6 +9,9 @@ public class PanelManager : MonoBehaviour {
     public string[] buttonImageName;
     public GameObject[] panels;
     public Image[] panelButtonImage;
+    public Text panelName;
+    public string[] panelNames;
+    public string sceneName;
 
     // Use this for initialization
     void Start () {
@@ -33,7 +36,10 @@ public class PanelManager : MonoBehaviour {
 
     void OpenPanel(int index)
     {   
-         panels[index].SetActive(true);     
+        panels[index].SetActive(true);
+        //SOLO PER AGGIORNARE IL NOME DEL TITOLETTO SOPRA, NON PER TUTTI I PANEL
+        if (panelName != null)
+            panelName.text = sceneName.ToUpper() + " > " + panelNames[index];      
     }
 
     void ChangeButton(int index)

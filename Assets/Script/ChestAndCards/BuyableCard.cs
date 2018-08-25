@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public class BuyableCard: MonoBehaviour {
@@ -34,6 +35,7 @@ public class BuyableCard: MonoBehaviour {
     public Text amountText;
     public Text costText;
     public Image costImage;
+    public Button buyCardButton;
 
     public void SetCardStats(string type, string title, string imagePath,int amount,  string costType, int cost, bool special)
     {
@@ -45,7 +47,14 @@ public class BuyableCard: MonoBehaviour {
         this.cost = cost;
         this.special = special;
 
+        buyCardButton.onClick.AddListener(() => OnButtonClick());
+
         AssignCardStats();
+    }
+
+    //DA AGGIUNGERE IL METODO CHE TI ACQUISTA LE CARTE;
+    public void OnButtonClick() {
+        Debug.Log("Clicked");
     }
 
     void AssignCardStats() {

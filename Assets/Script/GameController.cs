@@ -7,11 +7,14 @@ public class GameController : MonoBehaviour {
 
     //int gold, gems, level, experience;
     GameController instance;
+    public Color32 lastSceneTransitionColorUsed;
 
     List<Weapon> allWeapon = new List<Weapon>();
     public ResourceManager resourceManager;
     public Weapon actualWeapon;
     public Weapon lastSelectedWeapon;
+
+    public int actualWave;
 
     public delegate void OnStatsChanged();
     public static event OnStatsChanged ChangedStats;
@@ -26,6 +29,8 @@ public class GameController : MonoBehaviour {
         else {
             Destroy(gameObject);
         }
+
+        //TUTTE LE RISORSE VENGONO CARICATE DIRETTAMENTE DAL RESOURCE MANAGER
         resourceManager = new ResourceManager();
         DontDestroyOnLoad(this.gameObject);
     }
@@ -37,6 +42,8 @@ public class GameController : MonoBehaviour {
         GameChest.GiveGold += AddGold;
         PlayerPrefs.SetString("LittleGunacquired", "true");
         PlayerPrefs.SetInt("LittleGunlevel", 1);
+        PlayerPrefs.SetInt("actualWave",1);
+
 
         PopulateAllWeapon();
         LoadSavedVariable();
@@ -70,6 +77,9 @@ public class GameController : MonoBehaviour {
             actualWeapon = FindWeapon(PlayerPrefs.GetString("lastUsedWeapon"));
 
         lastSelectedWeapon = actualWeapon;
+
+        //CARICA L'ULTIMA ONDATA DI NEMICI A CUI SEI ARRIVATO
+        actualWave = PlayerPrefs.GetInt("actualWave");
         ChangedStats();
     }
 
@@ -88,10 +98,12 @@ public class GameController : MonoBehaviour {
     }
 
     public void SaveAllData() {
+
         PlayerPrefs.SetInt("gold", resourceManager.FindResource("gold").GetAmount());
         PlayerPrefs.SetInt("gems", resourceManager.FindResource("gems").GetAmount());
         PlayerPrefs.SetInt("level", resourceManager.FindResource("level").GetAmount());
         PlayerPrefs.SetInt("experience", resourceManager.FindResource("experience").GetAmount());
+        PlayerPrefs.SetInt("actualWave", actualWave);
 
         //SALVATAGGIO DEI DATI UTILI DELLE ARMI 
         foreach (Weapon w in allWeapon) {
@@ -143,9 +155,24 @@ public class GameController : MonoBehaviour {
         return list;
     }
 
+    //METODO CHE AGGIUNGE A UN ARMA DELLA LISTA DI WEAPON UNA QUANTITA' DI CARTE
+    public void AddWeaponCard(string nome, int amount) {
+        Weapon chosenWeapon = FindWeapon(nome);
+        chosenWeapon.cardNumber += amount;
+        Debug.Log(chosenWeapon.cardNumber);
+    }
+
     //METODO CHE CONTROLLA SE SI HA ABBASTANZA ORO PER COMPRARE QUALCOSA
     public bool CheckIfEnoughGold(int amount) {
         if (amount <= resourceManager.FindResource("gold").GetAmount())
+            return true;
+        else
+            return false;
+    }
+
+    public bool CheckIfEnoughGems(int amount)
+    {
+        if (amount <= resourceManager.FindResource("gems").GetAmount())
             return true;
         else
             return false;

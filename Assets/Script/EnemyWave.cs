@@ -8,27 +8,67 @@ public class EnemyWave {
 
     string enemyName;
     bool burst;
+    int maxAmount;
+    int actualAmount;
     float initialDelay;
     float inBetweenDelay;
-    float randomPercentageBetweenDelay;
-    bool started;
 
-    public EnemyWave(string enemyName, bool burst, float initialDelay, float inBetweenDelay, float randomPercentageBetweenDelay)
+    bool completed;
+    TimerManager timerManager;
+
+    public Timer allTimer;
+
+    public delegate void SpawnEnemy(string nome, bool bursting, int amount);
+    public event SpawnEnemy EnemyToSpawn;
+
+    public EnemyWave(string enemyName, bool burst,int maxAmount,  float initialDelay, float inBetweenDelay)
     {
+
         this.enemyName = enemyName;
         this.burst = burst;
+        this.maxAmount = maxAmount;
         this.initialDelay = initialDelay;
         this.inBetweenDelay = inBetweenDelay;
-        this.randomPercentageBetweenDelay = randomPercentageBetweenDelay;
     }
 
-    public void SetStarted() {
-        started = true;
+    //SOLO PER SAPERE QUANDO INIZIA L'ONDATA NULLA DI PIU'
+    public void StartEnemyWave(TimerManager timerManagerParam) {
+
+        actualAmount = 0;
+        timerManager = timerManagerParam;
+        allTimer = new Timer(initialDelay, false);
+        timerManager.AddTimer(allTimer);
+        allTimer.TimerEnded += EnemyWaveHasToSpawn;
     }
 
-    public bool GetStarted() {
-        return started;
+    public void EnemyWaveHasToSpawn() {
+
+        if (burst)
+        {
+            EnemyToSpawn(enemyName, burst, maxAmount);
+            EndEnemyWave();
+        }
+        else {
+            //SE DEVO LANCIARNE UNO ALLA VOLTA 
+            if (actualAmount < maxAmount)
+            {
+                EnemyToSpawn(enemyName, burst, 1);
+                allTimer.ReassignTimer(inBetweenDelay);
+                actualAmount++;
+            }
+            else {
+                EndEnemyWave();
+            }
+        }
     }
+
+    public void EndEnemyWave() {
+        timerManager.RemoveTimer(allTimer);
+        completed = true;
+        Debug.Log("WaveCompleted");
+    }
+
+
 
     public string GetEnemyName() {
         return enemyName;
@@ -44,9 +84,5 @@ public class EnemyWave {
 
     public float GetInBetweenDelay() {
         return inBetweenDelay;
-    }
-
-    public float GetRandomPercentageBetweenDelay() {
-        return randomPercentageBetweenDelay;
     }
 }
