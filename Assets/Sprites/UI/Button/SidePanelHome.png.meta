@@ -3,7 +3,7 @@ guid: af4e76a0c8ba01045906d9d2b29c8dd2
 TextureImporter:
   fileIDToRecycleName:
     21300000: WeaponButton
-    21300002: SkinButton
+    21300002: ProfileButton
     21300004: MissionButton
     21300006: EnemyButton
   externalObjects: {}
@@ -107,19 +107,19 @@ TextureImporter:
         width: 118
         height: 148
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58621f5f05124974d9e5403dce57f71d
+      spriteID: 8e7450febaea7544a97952c9b52ac4e2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SkinButton
+      name: ProfileButton
       rect:
         serializedVersion: 2
         x: 0
@@ -127,13 +127,13 @@ TextureImporter:
         width: 118
         height: 148
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97891be839101524d8185c981b6b628f
+      spriteID: 9cc1d0ef88e24e1469511ba5533943d5
       vertices: []
       indices: 
       edges: []
@@ -147,13 +147,13 @@ TextureImporter:
         width: 118
         height: 148
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7481e9c8cd8b48c4597f9fc24a1f0341
+      spriteID: 1659b55f6fe1d7e4399a31ddc30099f9
       vertices: []
       indices: 
       edges: []
@@ -167,13 +167,13 @@ TextureImporter:
         width: 118
         height: 148
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7bf3af889c8b954fa7c77b732a7511e
+      spriteID: 41109a7d6b765534db7b90d76f688afc
       vertices: []
       indices: 
       edges: []
@@ -181,12 +181,12 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a6adff7069b6f82488ea4ad2ad6ad2b7
+    spriteID: 6057bccee8956c345aeba291759cc692
     vertices: []
     indices: 
     edges: []
     weights: []
-  spritePackingTag: UI
+  spritePackingTag: 
   userData: 
   assetBundleName: 
   assetBundleVariant: 

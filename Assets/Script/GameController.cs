@@ -9,10 +9,10 @@ public class GameController : MonoBehaviour {
     GameController instance;
     public Color32 lastSceneTransitionColorUsed;
 
-    List<Weapon> allWeapon = new List<Weapon>();
+    List<Baloon> allBaloon = new List<Baloon>();
     public ResourceManager resourceManager;
-    public Weapon actualWeapon;
-    public Weapon lastSelectedWeapon;
+    public Baloon actualBaloon;
+    public Baloon lastSelectedBaloon;
 
     public int actualWave;
 
@@ -37,11 +37,10 @@ public class GameController : MonoBehaviour {
 
     void Start () {
 
+        PlayerPrefs.DeleteAll();
         Application.targetFrameRate = 60;
         EnemyVariable.EnemyDeadGold += AddGold;
         GameChest.GiveGold += AddGold;
-        PlayerPrefs.SetString("LittleGunacquired", "true");
-        PlayerPrefs.SetInt("LittleGunlevel", 1);
         PlayerPrefs.SetInt("actualWave",1);
 
 
@@ -53,30 +52,30 @@ public class GameController : MonoBehaviour {
     void LoadSavedVariable() {
 
         //INIZIALIZZAZIONE ARMI
-        foreach (Weapon w in allWeapon) {
-            if (PlayerPrefs.GetString(w.name + "acquired") == "true")
-                w.SetAcquired(true);
+        foreach (Baloon b in allBaloon) {
+            if (PlayerPrefs.GetString(b.GetName() + "acquired") == "true")
+                b.SetAcquired(true);
             else
-                w.SetAcquired(false);
+                b.SetAcquired(false);
 
-            if (PlayerPrefs.HasKey(w.name + "level"))
-                w.level = PlayerPrefs.GetInt(w.name + "level");
+            if (PlayerPrefs.HasKey(b.GetName() + "level"))
+                b.SetLevel(PlayerPrefs.GetInt(b.GetName() + "level"));
             else
-                w.level = 0;
+                b.SetLevel(0);
 
-            if (PlayerPrefs.HasKey(w.name + "cardNumber"))
-                w.cardNumber = PlayerPrefs.GetInt(w.name + "cardNumber");
+            if (PlayerPrefs.HasKey(b.GetName() + "cardNumber"))
+                b.SetCardNumber(PlayerPrefs.GetInt(b.GetName() + "cardNumber"));
             else
-                w.cardNumber = 0;
+                b.SetCardNumber(0);
         }
 
         //ASSEGNA L'ARMA INIZIALE SULLA BASE DI COSA HAI USATO PER ULTIMO
-        if (FindWeapon(PlayerPrefs.GetString("lastUsedWeapon")) == null)
-            actualWeapon = FindWeapon("LittleGun");
+        if (FindBaloon(PlayerPrefs.GetString("lastUsedBaloon")) == null)
+            actualBaloon = FindBaloon("normal");
         else
-            actualWeapon = FindWeapon(PlayerPrefs.GetString("lastUsedWeapon"));
+            actualBaloon = FindBaloon(PlayerPrefs.GetString("lastUsedBaloon"));
 
-        lastSelectedWeapon = actualWeapon;
+        lastSelectedBaloon = actualBaloon;
 
         //CARICA L'ULTIMA ONDATA DI NEMICI A CUI SEI ARRIVATO
         actualWave = PlayerPrefs.GetInt("actualWave");
@@ -86,12 +85,12 @@ public class GameController : MonoBehaviour {
     public void ResetWeaponData() {
 
         resourceManager.SetResourceAmount("gold", 100000);
-        foreach (Weapon w in allWeapon) {
-            w.acquired = false;
-            w.level = 0;
+        foreach (Baloon b in allBaloon) {
+            b.SetAcquired(false);
+            b.SetLevel(0);
         }
-        allWeapon[0].acquired = true;
-        allWeapon[0].level = 1;
+        allBaloon[0].SetAcquired( true);
+        allBaloon[0].SetLevel(1);
 
         SaveAllData();
         LoadSavedVariable();
@@ -106,60 +105,50 @@ public class GameController : MonoBehaviour {
         PlayerPrefs.SetInt("actualWave", actualWave);
 
         //SALVATAGGIO DEI DATI UTILI DELLE ARMI 
-        foreach (Weapon w in allWeapon) {
-            if (w.acquired == true)
-                PlayerPrefs.SetString(w.name + "acquired", "true");
+        foreach (Baloon b in allBaloon) {
+            if (b.GetAcquired() == true)
+                PlayerPrefs.SetString(b.GetName() + "acquired", "true");
             else
-                PlayerPrefs.SetString(w.name + "acquired", "false");
+                PlayerPrefs.SetString(b.GetName() + "acquired", "false");
 
-            PlayerPrefs.SetInt(w.name + "level", w.level);
-            PlayerPrefs.SetInt(w.name + "cardNumber", w.cardNumber);
+            PlayerPrefs.SetInt(b.GetName() + "level", b.GetLevel());
+            PlayerPrefs.SetInt(b.GetName() + "cardNumber", b.GetCardNumber());
 
         }
     }
 
     void PopulateAllWeapon() {
 
-        allWeapon.Add(new Weapon("LittleGun", "", 10, 0.5f, 2.2f, 1.8f, 1, 1, 0));
-        allWeapon.Add(new Weapon("Revolver", "", 14, 0.55f, 2.2f, 1.8f, 1, 1, 0));
-        allWeapon.Add(new Weapon("Uzi", "", 12, 0.24f, 2f, 1.25f, 1, 1, 0));
-        allWeapon.Add(new Weapon("Assault", "", 20, 0.3f, 2f, 1.25f, 1, 1, 0));
-        allWeapon.Add(new Weapon("Shotgun", "", 20, 1f, 2f, 1.25f, 5, 1, 4));
-        allWeapon.Add(new Weapon("Sniper", "", 100, 0.8f, 2f, 1.25f, 1, 3, 0));
-
-        allWeapon[0].SetShopWeaponStats(0, 0, 8, 50, 40, 40);
-        allWeapon[1].SetShopWeaponStats(0, 1000, 12, 45, 40, 40);
-        allWeapon[2].SetShopWeaponStats(0, 2000, 10, 80, 40, 40);
-        allWeapon[3].SetShopWeaponStats(0, 5000, 30, 65, 40, 40);
-        allWeapon[4].SetShopWeaponStats(0, 10000, 60, 20, 40, 40);
-        allWeapon[5].SetShopWeaponStats(0, 10000, 86, 30, 40, 40);
-
+        allBaloon.Add(new Baloon("normal", 3, "long", 10, 15 , 1 ));
+        allBaloon.Add(new Baloon("triple", 1, "long", 8, 10, 3));
+        allBaloon.Add(new Baloon("big", 8, "medium", 20, 30, 1));
+        allBaloon.Add(new Baloon("gas", 4, "medium", 30, 10, 1, 2, new Debuf("gas", 4f), 4f));
     }
 
     //METODO CHE RESTITUISCE L'OGGETTO ARMA CON NOME INDICATO
-    public Weapon FindWeapon(string nome) {
-        foreach (Weapon w in allWeapon) {
-            if (w.name == nome)
-                return w;
+    public Baloon FindBaloon(string nome) {
+        foreach (Baloon b in allBaloon) {
+            if (b.GetName() == nome)
+                return b;
         }
         return null;
     }
 
     //METODO CHE RITORNA LA LISTA DI TUTTE LE ARMI POSSEDUTE 
-    public List<Weapon> GetAcquiredWeapon() {
-        List<Weapon> list = new List<Weapon>();
-        foreach (Weapon w in allWeapon) {
-            if (w.acquired == true)
-                list.Add(w);
+    public List<Baloon> GetAcquiredBaloon() {
+        List<Baloon> list = new List<Baloon>();
+        foreach (Baloon b in allBaloon) {
+            if (b.GetAcquired() == true)
+                list.Add(b );
         }
         return list;
     }
 
     //METODO CHE AGGIUNGE A UN ARMA DELLA LISTA DI WEAPON UNA QUANTITA' DI CARTE
-    public void AddWeaponCard(string nome, int amount) {
-        Weapon chosenWeapon = FindWeapon(nome);
-        chosenWeapon.cardNumber += amount;
-        Debug.Log(chosenWeapon.cardNumber);
+    public void AddBaloonCard(string nome, int amount) {
+        Baloon chosenBaloon = FindBaloon(nome);
+        chosenBaloon.AddToCardNumber(amount);
+        Debug.Log(chosenBaloon.GetCardNumber());
     }
 
     //METODO CHE CONTROLLA SE SI HA ABBASTANZA ORO PER COMPRARE QUALCOSA
@@ -202,8 +191,8 @@ public class GameController : MonoBehaviour {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //GETTERS
 
-    public List<Weapon> GetAllWeaponList() {
-        return allWeapon;
+    public List<Baloon> GetAllBaloonList() {
+        return allBaloon;
     }
    
 }

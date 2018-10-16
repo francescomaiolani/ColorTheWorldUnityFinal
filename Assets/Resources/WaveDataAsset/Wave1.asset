@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 091d3f485f0aa494094e8542ab578931, type: 3}
+  m_Name: Wave1
+  m_EditorClassIdentifier: 
+  waveIndex: 1
+  waves:
+  - enemyName: Cappuccio
+    burst: 0
+    maxNumber: 10
+    initialSpawnTime: 0
+    interSpawnTime: 2
+  - enemyName: Piccolo
+    burst: 1
+    maxNumber: 3
+    initialSpawnTime: 10
+    interSpawnTime: 0

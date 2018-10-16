@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Enemy
   - WallCollider
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -16,16 +17,16 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Terra
+  - Nemici1
+  - Armi
+  - Floor1
+  - Floor2
+  - Floor3
+  - Nemici2
+  - Nemici3
+  - Wall
+  - DetectorBaloon
   - 
   - 
   - 
@@ -47,14 +48,8 @@ TagManager:
   - name: Ombre
     uniqueID: 1795202017
     locked: 0
-  - name: PartiNemiciDietro
-    uniqueID: 230714835
-    locked: 0
   - name: PlayerEnemy
     uniqueID: 2483254285
-    locked: 0
-  - name: PartiNemiciDavanti
-    uniqueID: 3587615095
     locked: 0
   - name: UI
     uniqueID: 203798577

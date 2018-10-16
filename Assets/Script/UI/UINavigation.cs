@@ -40,8 +40,8 @@ public class UINavigation : MonoBehaviour {
     }
 
     void DeactivateSceneChange() {
-        mask.SetActive(false);
         orangePanel.SetActive(false);
+        mask.SetActive(false);
     }
 
     public void ChangeScene()

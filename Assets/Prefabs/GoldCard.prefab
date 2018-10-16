@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 222438960566473032}
   - component: {fileID: 114536603834717940}
   - component: {fileID: 114015121999167744}
+  - component: {fileID: 114744326318715262}
   m_Layer: 5
   m_Name: GoldCard
   m_TagString: Untagged
@@ -447,6 +448,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: ASSAULT
+--- !u!114 &114744326318715262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821364815492170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38937c192cc431a40aa04c1dd9f45fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 0}
+  spruzzo: {fileID: 0}
 --- !u!114 &114748549810481154
 MonoBehaviour:
   m_ObjectHideFlags: 1

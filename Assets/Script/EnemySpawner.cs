@@ -11,27 +11,33 @@ public class EnemySpawner : MonoBehaviour
 
 
     public List<Wave> allEnemyLevelWaves = new List<Wave>();
+
+    public WaveData[] allWaves;
+
     public Wave actualLevelWave;
 
-    public float upPosition;
-    public float downPosition;
-    float rangePosition;
-    float range;
+    LayerMask nemici1;
+    LayerMask nemici2;
+    LayerMask nemici3;
 
     public int maxLaneNumber;
+
+    int[] waveZOrderCount;
 
     // Use this for initialization
     void Start()
     {
-        rangePosition = upPosition - downPosition;
-        range = rangePosition / maxLaneNumber;
+        nemici1 = LayerMask.NameToLayer("Nemici1");
+        nemici2 = LayerMask.NameToLayer("Nemici2");
+        nemici3 = LayerMask.NameToLayer("Nemici3");
+        waveZOrderCount = new int[maxLaneNumber];
 
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         timerManager = GameObject.Find("TimerManager").GetComponent<TimerManager>();
 
-        CreateAllWaves();
+        actualLevelWave = new Wave(allWaves[gameController.actualWave - 1]);
 
-        actualLevelWave = allEnemyLevelWaves[gameController.actualWave - 1];
+        //actualLevelWave = allWaves[gameController.actualWave - 1];
         SubscribeToEvent();
         actualLevelWave.StartWave(timerManager);
     }
@@ -48,19 +54,30 @@ public class EnemySpawner : MonoBehaviour
         if (burst)
             for (int i = 0; i < amount; i++)
             {
-                int lane = i + (maxLaneNumber - amount) / 2;
+                int lane = Random.Range(1, maxLaneNumber + 1 );
                 InstantiateEnemy(FindEnemyPrefab(nome), lane);
             }
         else {
-            int lane = Random.Range(0,maxLaneNumber);
+            int lane = Random.Range(1,maxLaneNumber + 1);
             InstantiateEnemy(FindEnemyPrefab(nome), lane);
         }
     }
 
     //METODO CHE EFFETTIVAMENTE SPAWNA IL NEMICO
     void InstantiateEnemy(GameObject enemy, int lane) {
-        GameObject enemyInstance = Instantiate(enemy, new Vector3(26, downPosition + lane * range, 0), Quaternion.identity);
-        enemyInstance.GetComponent<EnemyVariable>().SetCorrectZOrder(maxLaneNumber - lane);
+        GameObject enemyInstance = Instantiate(enemy, new Vector3(26, 5, 0), Quaternion.identity);
+        enemyInstance.GetComponent<EnemyVariable>().SetCorrectZOrder(maxLaneNumber - lane, waveZOrderCount[lane -1] );
+        if (lane == 1)
+            enemyInstance.layer = nemici1;
+        else if (lane == 2)
+            enemyInstance.layer = nemici2;
+        else if (lane == 3)
+            enemyInstance.layer = nemici3;
+
+        waveZOrderCount[lane - 1] += 5;
+        if (waveZOrderCount[lane - 1] >= 190)
+            waveZOrderCount[lane - 1] = 0;
+
     }
 
     //CERCA IL PREFAB DEL NEMICO GIUSTO E LO RESTUTUISCE
@@ -70,34 +87,15 @@ public class EnemySpawner : MonoBehaviour
         {
             case "Pugile":
                 return enemyArray[0];
-            case "Piccolo":
-                return enemyArray[1];
             case "Grande":
+                return enemyArray[1];
+            case "Piccolo":
                 return enemyArray[2];
+            case "Cappuccio":
+                return enemyArray[3];
         }
         return null;
     }
-
-    //METODO ENORME CHE CREA LA LISTA CON TUTTE LE ONDATE DI NEMICI
-    void CreateAllWaves() {
-
-        //PRIMO LIVELLO DEL GIOCO
-        List<EnemyWave> firstEnemyWave = new List<EnemyWave>   {
-            new EnemyWave("Pugile", false, 20, 0, 1f),
-            new EnemyWave("Piccolo", false, 5, 4, 2),
-            new EnemyWave("Grande", false, 3, 3, 10)
-        };
-        allEnemyLevelWaves.Add(new Wave(firstEnemyWave));
-
-        //PRIMO LIVELLO DEL GIOCO
-        List<EnemyWave> secondEnemyWave = new List<EnemyWave>   {
-            new EnemyWave("Pugile", false, 40, 0, 1f),
-            new EnemyWave("Piccolo", false, 10, 4, 0)
-        };
-        allEnemyLevelWaves.Add(new Wave(secondEnemyWave));
-
-    }
-
 
     //SOLO PER NON ISCRIVERTI PIU' AGLI EVENTI DI SPAWN DEI NEMICI
     private void OnDisable()

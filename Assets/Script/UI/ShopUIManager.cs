@@ -27,7 +27,7 @@ public class ShopUIManager : MonoBehaviour {
         GameController.ChangedStats += UpdateText;
         UpdateText();
 
-        CreateBuyableCards();
+        //CreateBuyableCards();
     }
 
     void UpdateText()
@@ -70,13 +70,13 @@ public class ShopUIManager : MonoBehaviour {
 
         BuyableCard cardCreated = CreateCard(index);
 
-        List<Weapon> acquiredWeapon = gameController.GetAcquiredWeapon();
-        int weaponIndex = Random.Range(0, acquiredWeapon.Count);
-        Weapon chosenWeapon = acquiredWeapon[weaponIndex];
+        List<Baloon> acquiredBaloon = gameController.GetAcquiredBaloon();
+        int baloonIndex = Random.Range(0, acquiredBaloon.Count);
+        Baloon chosenBaloon = acquiredBaloon[baloonIndex];
         if (specialCard)
-            cardCreated.SetCardStats("Weapon", chosenWeapon.name, "BuyableCard/Weapon/" + chosenWeapon.name , Random.Range(40,50),  "gold", 5000, specialCard );
+            cardCreated.SetCardStats("Weapon", chosenBaloon.GetName(), "BuyableCard/Weapon/" + chosenBaloon.GetName(), Random.Range(40,50),  "gold", 5000, specialCard );
         else
-            cardCreated.SetCardStats("Weapon", chosenWeapon.name, "BuyableCard/Weapon/" + chosenWeapon.name, Random.Range(8, 20), "gold", 1000, specialCard);
+            cardCreated.SetCardStats("Weapon", chosenBaloon.GetName(), "BuyableCard/Weapon/" + chosenBaloon.GetName(), Random.Range(8, 20), "gold", 1000, specialCard);
 
     }
 
@@ -181,7 +181,7 @@ public class ShopUIManager : MonoBehaviour {
     public void CollectChestCard() {
         foreach (Card c in chestCard) {
             if (c.GetCardType() == "weapon")
-                gameController.AddWeaponCard(c.GetTitle(), c.GetAmount());
+                gameController.AddBaloonCard(c.GetTitle(), c.GetAmount());
             Debug.Log("Added" + c.GetAmount());
         }
 

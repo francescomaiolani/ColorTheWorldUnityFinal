@@ -11,12 +11,11 @@ public class MenuUIManager : MonoBehaviour {
 
     public Image[] leftPanelWeapon;
 
-    public Slider damageBar, fireRateBar, heatingBar;
-    public Text weaponName;
-    public Button buyWeapon;
-    public Text buyWeaponText;
+    public Text baloonName;
+    public Button buyBaloon;
+    public Text buyBaloonText;
     public Image goldIcon;
-    public Image weaponImage;
+    public Image baloonImage;
     public Image LightRay;
     public ShadowLenghtAdapter weaponShadow;
 
@@ -27,7 +26,7 @@ public class MenuUIManager : MonoBehaviour {
 
 
     //public Text weaponPrice;
-    public Text weaponLevel;
+    public Text baloonLevel;
 
     public delegate void OnShadowToChange();
     public static event OnShadowToChange ChangeShadow;
@@ -38,8 +37,8 @@ public class MenuUIManager : MonoBehaviour {
         GameController.ChangedStats += UpdateText;
         GameController.ChangedStats += UpdateWeaponPanel;
         UpdateText();
-        UpdateWeaponPanel();
-        UpdateLeftPanelWeapon();
+        //UpdateWeaponPanel();
+        //UpdateLeftPanelWeapon();
     }
 
     void UpdateText()
@@ -51,19 +50,17 @@ public class MenuUIManager : MonoBehaviour {
     }
 
     void UpdateWeaponPanel() {
-        Weapon selectedWeapon = gameController.lastSelectedWeapon;
-        weaponLevel.text = selectedWeapon.level.ToString();
-        weaponName.text = selectedWeapon.name.ToUpper();
+        Baloon selectedBaloon = gameController.lastSelectedBaloon;
+        baloonLevel.text = selectedBaloon.GetLevel().ToString();
+        baloonName.text = selectedBaloon.GetName().ToUpper();
         //weaponPrice.text = selectedWeapon.goldCost.ToString();
-        damageBar.value = selectedWeapon.damageIndicator;
-        fireRateBar.value = selectedWeapon.fireRateIndicator;
-        heatingBar.value = selectedWeapon.heatingRateIndicator;
+        
         //CARICAMENTO DELL'IMMAGINE DELL'ARMA
-        Sprite weaponSprite = LoadWeaponSprite(selectedWeapon.name, selectedWeapon.acquired);
-        weaponImage.sprite = weaponSprite;
-        weaponImage.rectTransform.sizeDelta = new Vector2(weaponImage.sprite.rect.width * 1.15f, weaponImage.sprite.rect.height * 1.15f);
+        Sprite weaponSprite = LoadWeaponSprite(selectedBaloon.GetName(), selectedBaloon.GetAcquired());
+        baloonImage.sprite = weaponSprite;
+        baloonImage.rectTransform.sizeDelta = new Vector2(baloonImage.sprite.rect.width * 1.15f, baloonImage.sprite.rect.height * 1.15f);
         //weaponShadow.imageReference = weaponImage;
-        if (selectedWeapon.acquired)
+        if (selectedBaloon.GetAcquired())
             LightRay.gameObject.SetActive(true);
         else
             LightRay.gameObject.SetActive(false);
@@ -73,10 +70,10 @@ public class MenuUIManager : MonoBehaviour {
     }
 
     void UpdateLeftPanelWeapon() {
-        List<Weapon> allWeapon = gameController.GetAllWeaponList();
+        List<Baloon> allBaloon = gameController.GetAllBaloonList();
 
         for (int i = 0; i < leftPanelWeapon.Length; i++) {
-            leftPanelWeapon[i].sprite = LoadWeaponSprite(allWeapon[i].name, allWeapon[i].acquired);
+            leftPanelWeapon[i].sprite = LoadWeaponSprite(allBaloon[i].GetName(), allBaloon[i].GetAcquired());
             //leftPanelWeapon[i].SetNativeSize();
         }
     }
@@ -104,44 +101,44 @@ public class MenuUIManager : MonoBehaviour {
     }
     void UpdateBuyButton() {
 
-        if (gameController.lastSelectedWeapon.acquired == true)  {
-            buyWeaponText.text = "EQUIP";
+        if (gameController.lastSelectedBaloon.GetAcquired() == true)  {
+            buyBaloonText.text = "EQUIP";
             goldIcon.gameObject.SetActive(false);
-            buyWeapon.interactable = true;
+            buyBaloon.interactable = true;
         }
-        else if (gameController.lastSelectedWeapon.levelToAcquire > gameController.resourceManager.FindResource("level").GetAmount())  {
-            buyWeaponText.text = "HIGHER LEVEL REQUIRED";
+        else if (gameController.lastSelectedBaloon.GetLevelToAcquire() > gameController.resourceManager.FindResource("level").GetAmount())  {
+            buyBaloonText.text = "HIGHER LEVEL REQUIRED";
             goldIcon.gameObject.SetActive(false);
-            buyWeapon.interactable = false;
+            buyBaloon.interactable = false;
         }
-        else if (!gameController.lastSelectedWeapon.acquired && gameController.lastSelectedWeapon.levelToAcquire <= gameController.resourceManager.FindResource("level").GetAmount()) {
-            buyWeaponText.text = HomeUIManager.ConvertCostToString(gameController.lastSelectedWeapon.goldCost);
+        else if (!gameController.lastSelectedBaloon.GetAcquired() && gameController.lastSelectedBaloon.GetLevelToAcquire() <= gameController.resourceManager.FindResource("level").GetAmount()) {
+            buyBaloonText.text = HomeUIManager.ConvertCostToString(gameController.lastSelectedBaloon.GetGoldCost());
             goldIcon.gameObject.SetActive(true);
-            buyWeapon.interactable = true;
+            buyBaloon.interactable = true;
         }
 
     }
 
-    public void SelectWeapon(string nome) {
-        Weapon weaponSelected = gameController.FindWeapon(nome);
-        gameController.lastSelectedWeapon = weaponSelected;
-        if (gameController.lastSelectedWeapon.acquired == true)
-            gameController.actualWeapon = weaponSelected;
+    public void SelectBaloon(string nome) {
+        Baloon baloonSelected = gameController.FindBaloon(nome);
+        gameController.lastSelectedBaloon = baloonSelected;
+        if (gameController.lastSelectedBaloon.GetAcquired() == true)
+            gameController.actualBaloon = baloonSelected;
 
         UpdateWeaponPanel();
     }
 
     public void BuyWeapon() {
-        if (gameController.CheckIfEnoughGold(gameController.lastSelectedWeapon.goldCost) && !gameController.lastSelectedWeapon.acquired)
+        if (gameController.CheckIfEnoughGold(gameController.lastSelectedBaloon.GetGoldCost()) && !gameController.lastSelectedBaloon.GetAcquired())
         {
-            gameController.AddGold(-gameController.lastSelectedWeapon.goldCost);
-            gameController.FindWeapon(gameController.lastSelectedWeapon.name).acquired = true;
-            gameController.actualWeapon = gameController.lastSelectedWeapon;
-            gameController.actualWeapon.level = 1;
+            gameController.AddGold(-gameController.lastSelectedBaloon.GetGoldCost());
+            gameController.FindBaloon(gameController.lastSelectedBaloon.GetName()).SetAcquired(true);
+            gameController.actualBaloon = gameController.lastSelectedBaloon;
+            gameController.actualBaloon.SetLevel( 1);
             gameController.SaveAllData();
             UpdateWeaponPanel();
             UpdateBuyButton();
-            ShowWeaponBoughtPanel(weaponImage.sprite);
+            ShowWeaponBoughtPanel(baloonImage.sprite);
             UpdateLeftPanelWeapon();
 
         }
@@ -154,7 +151,7 @@ public class MenuUIManager : MonoBehaviour {
         weaponBoughtPanel.SetActive(true);
         weaponBoughtImage.sprite = weaponSprite;
         weaponBoughtImage.SetNativeSize();
-        weaponBoughtName.text = gameController.lastSelectedWeapon.name.ToUpper();
+        weaponBoughtName.text = gameController.lastSelectedBaloon.GetName().ToUpper();
         Invoke("CloseWeaponBoughtPanel", 3f);
     }
     void CloseWeaponBoughtPanel() {

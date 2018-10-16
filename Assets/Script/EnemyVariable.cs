@@ -4,41 +4,30 @@ using UnityEngine;
 
 public class EnemyVariable : MonoBehaviour{
 
-    public string enemyName;
-    public float maxLife;
+    
     private float actualLife;
-    public bool shielded;
-    public float shieldLife;
-    public float damage;
-    public float attackRate;
-    public bool kamikadze;
-    public int goldGiven;
-    public float specialPointGiven;
+    private float actualShieldLife;
+    private bool shielded; 
     bool hit;
 
-    public float timeToDestroy;
+    public EnemyData data;
+
+    Color32 lastColorHit;
+
     public SpriteMask spriteMask;
     public SpriteRenderer[] enemyPieces;
     public Transform shadow;
 
-    bool wallReached;
-
-    public GameObject spot;
-    public GameObject bodySpot;
-    public GameObject attackParticle;
-    public Vector3 attackParticleOffset;
-
     public Animator animator;
     public CapsuleCollider2D capsuleCollider;
-    public BoxCollider2D wallCollider;
     public EnemyMovement enemyMovement;
-    public Color32[] spotColors;
 
+
+    //EVENTS
     public delegate void OnEnemyDeadGold(int gold);
     public delegate void OnEnemyDeadSpecialPoint(float specialPoint);
     public delegate void OnEnemyDeadResourceText(int gold, Vector2 position, string tipo);
     public delegate void OnAttackDone(float amount);
-
 
     public static event OnEnemyDeadGold EnemyDeadGold;
     public static event OnEnemyDeadSpecialPoint EnemyDeadSpecialPoint;
@@ -48,17 +37,24 @@ public class EnemyVariable : MonoBehaviour{
 
     // Use this for initialization
     void Start () {
-        actualLife = maxLife;
+        actualLife = data.maxLife;
+        shielded = data.shielded;
+        if (data.shielded)
+            actualShieldLife = data.maxShieldLife;
         enemyMovement.ReachedWall += WallReached;
+        enemyMovement.NotReachedWall += WallNotReached;
+
     }
-  
+
     //ORDINA I PEZZI NEL GIUSTO ORDINE
-    public void SetCorrectZOrder(int lane) {
-        int laneOrder = lane * 50;
+    public void SetCorrectZOrder(int lane, int positionInLane) {
+        int laneOrder = (lane - 1) * 200 + positionInLane;
         foreach (SpriteRenderer spr in enemyPieces)
         {
             spr.sortingOrder += laneOrder;
         }
+        spriteMask.frontSortingOrder = enemyPieces[0].sortingOrder + 1;
+        spriteMask.backSortingOrder = enemyPieces[0].sortingOrder;
     }
 
     public void ApplyDamage(float damage) {
@@ -67,10 +63,10 @@ public class EnemyVariable : MonoBehaviour{
             spriteMask.enabled = true;
         }
 
-        if (actualLife > 0 && shielded && shieldLife > 0)
+        if (actualLife > 0 && data.shielded && actualShieldLife > 0)
         {
-            shieldLife -= damage;
-            if (shieldLife <= 0)
+            actualShieldLife -= damage;
+            if (actualShieldLife <= 0)
                 shielded = false;
         }
         else if (actualLife > 0 && !shielded) {
@@ -84,56 +80,66 @@ public class EnemyVariable : MonoBehaviour{
     public void Dead() {
 
         animator.SetTrigger("Death");
-        EnemyDeadGold(goldGiven);
-        EnemyDeadSpecialPoint(specialPointGiven);
-        EnemyDeadSpawnResourceText(goldGiven, transform.position, "gold");
+        DeactivatePhysics();
+        Destroy(gameObject, data.timeToDestroy);
 
-        capsuleCollider.enabled = false;
-        wallCollider.enabled = false;
+        EnemyDeadGold(data.goldGiven);
+        EnemyDeadSpecialPoint(data.specialPointGiven);
+        EnemyDeadSpawnResourceText(data.goldGiven, transform.position, "gold");
 
         enemyMovement.ReachedWall -= WallReached;
+        enemyMovement.NotReachedWall -= WallNotReached;
+
+    }
+
+    public void DeactivatePhysics() {
+        capsuleCollider.enabled = false;
         enemyMovement.Stop();
-        Destroy(gameObject, timeToDestroy);
+        enemyMovement.enabled = false;
+        GetComponent<Rigidbody2D>().Sleep();
     }
  
     public void Attack() {
-        ApplyWallDamage(damage);
-        GameObject spruzzoNero = Instantiate(attackParticle, enemyPieces[0].transform.position + attackParticleOffset, Quaternion.identity);
+        ApplyWallDamage(data.damage);
+        GameObject spruzzoNero = Instantiate(data.attackParticle, enemyPieces[0].transform.position + data.attackParticleOffset, Quaternion.identity);
         Destroy(spruzzoNero, 1f);
     }
 
     public void Explode()
     {
-        ApplyWallDamage(damage); 
+        ApplyWallDamage(data.damage); 
         enemyMovement.ReachedWall -= WallReached;
-        GameObject spruzzoNero = Instantiate(attackParticle, enemyPieces[0].transform.position + attackParticleOffset , Quaternion.identity);
+        GameObject spruzzoNero = Instantiate(data.attackParticle, enemyPieces[0].transform.position + data.attackParticleOffset , Quaternion.identity);
         Destroy(spruzzoNero, 1f);
         Destroy(gameObject);
     }
 
     public void WallReached() {
-        wallReached = true;
         //se ti fai esplodere con l'attacco
-        if (kamikadze) {
-            capsuleCollider.enabled = false;        
+        if (data.kamikadze) {
+            DeactivatePhysics();
         }
         animator.SetTrigger("Attack");
     }
 
+    //SE SONO STATO SBALZATO INDIETRO DAL MURO RITORNA A CAMMINARE
+    public void WallNotReached()
+    {
+        animator.SetTrigger("Walk");
+    }
+
     void SpawnSpot()
     {
-        GameObject spotInstance = Instantiate(spot, shadow.position, Quaternion.identity);
-        spotInstance.GetComponent<SpriteRenderer>().color = spotColors[Random.Range(0, spotColors.Length)];
+        GameObject spotInstance = Instantiate(data.floorStain, shadow.position, Quaternion.identity);
+        spotInstance.GetComponent<SpriteRenderer>().color = lastColorHit;
     }
 
-    public void SpawnSpotOnBody(Vector3 position)
+    public void SpawnSpotOnBody(Vector3 position, Color32 color)
     {
-        GameObject spotInstance = Instantiate(bodySpot, position, Quaternion.identity, enemyPieces[0].transform);
-        SpriteRenderer sporSprite = spotInstance.GetComponent<SpriteRenderer>();
-        sporSprite.color = spotColors[Random.Range(0, spotColors.Length)];
-        sporSprite.sortingOrder = enemyPieces[0].sortingOrder + 1;
+        GameObject spotInstance = Instantiate(data.bodyStain, position, Quaternion.identity, enemyPieces[0].transform);
+        SpriteRenderer spotSprite = spotInstance.GetComponent<SpriteRenderer>();
+        spotSprite.color = color;
+        spotSprite.sortingOrder = enemyPieces[0].sortingOrder + 1;
+        lastColorHit = color;
     }
-
-
-
 }
