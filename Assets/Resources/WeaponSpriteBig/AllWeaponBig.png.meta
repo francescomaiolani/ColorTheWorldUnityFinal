@@ -1,17 +1,33 @@
 fileFormatVersion: 2
 guid: 33a33f5c95b0f0b4e968c573ca26e914
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: LittleGun
-    21300002: Shotgun
-    21300004: Sniper
-    21300006: Demolisher
-    21300008: PaintThrower
-    21300010: Revolver
-    21300012: Assault
-    21300014: Uzi
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: LittleGun
+  - first:
+      213: 21300002
+    second: Shotgun
+  - first:
+      213: 21300004
+    second: Sniper
+  - first:
+      213: 21300006
+    second: Demolisher
+  - first:
+      213: 21300008
+    second: PaintThrower
+  - first:
+      213: 21300010
+    second: Revolver
+  - first:
+      213: 21300012
+    second: Assault
+  - first:
+      213: 21300014
+    second: Uzi
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -65,8 +81,9 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -77,7 +94,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -88,7 +106,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -99,6 +118,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -118,6 +138,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 6128ff7531c95314dabcc2a446806c80
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -138,6 +159,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 411d11f60da944f4d91d6b99b9508733
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -158,6 +180,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: aa6b3f0b476458f48b25d12e59264681
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -178,6 +201,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 92ac625ecf3786f4da69cde71062fdf8
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -198,6 +222,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: a44ef033df3514840bf3de263a1c1f00
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -218,6 +243,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: a64dc7579ff1e1342a8f849b6c549872
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -238,6 +264,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 129baa17a86c6554c84e67851209970f
+      internalID: 21300012
       vertices: []
       indices: 
       edges: []
@@ -258,6 +285,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 04006ca8c5f21bb428fd8696876c79d6
+      internalID: 21300014
       vertices: []
       indices: 
       edges: []
@@ -266,11 +294,15 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: bd8a6fad22c142a408282fc0b1c1db68
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

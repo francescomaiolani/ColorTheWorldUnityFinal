@@ -1,17 +1,33 @@
 fileFormatVersion: 2
 guid: d41c06714b480c5479881b9415d98105
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: CinturinoDavantiNemicoPiccolo
-    21300002: CinturinoDietroNemicoPiccolo
-    21300004: CiuffoNemicoPiccolo
-    21300006: CascoDavantiNemicoPiccolo
-    21300008: CascoDietroNemicoPiccolo
-    21300010: CorpoNemicoPiccolo
-    21300012: GambaNemicoPiccolo
-    21300014: OmbraNemicoPiccolo
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: CinturinoDavantiNemicoPiccolo
+  - first:
+      213: 21300002
+    second: CinturinoDietroNemicoPiccolo
+  - first:
+      213: 21300004
+    second: CiuffoNemicoPiccolo
+  - first:
+      213: 21300006
+    second: CascoDavantiNemicoPiccolo
+  - first:
+      213: 21300008
+    second: CascoDietroNemicoPiccolo
+  - first:
+      213: 21300010
+    second: CorpoNemicoPiccolo
+  - first:
+      213: 21300012
+    second: GambaNemicoPiccolo
+  - first:
+      213: 21300014
+    second: OmbraNemicoPiccolo
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -65,8 +81,9 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -77,7 +94,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -88,7 +106,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -99,6 +118,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -118,6 +138,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 50a3d10783997fc4fad424844c8525ae
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -138,6 +159,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 30d6b52995158f344ab179488f75082d
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -158,6 +180,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 171b156814dcb5e45868aebead7a3e8f
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -178,6 +201,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 1fdcf722f867d7d438232267a6ffed07
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -198,6 +222,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 63e7b05190cbcc3448f57ed395f1e0fc
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -218,6 +243,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 6b3fd84df2e5a4f4890d263599b06434
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -238,6 +264,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 4a7476a0ecad47f4381b5773d57484ce
+      internalID: 21300012
       vertices: []
       indices: 
       edges: []
@@ -258,6 +285,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 659a0d24fb624f642aa5f4c78edc8f69
+      internalID: 21300014
       vertices: []
       indices: 
       edges: []
@@ -266,11 +294,15 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 9728792262380ca43a7c16a80c6cbdea
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: Enemy
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
